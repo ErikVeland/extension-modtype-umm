@@ -2,3 +2,4 @@ dist
 node_modules 
 out 
 src/validationCode  
+.DS_Store
