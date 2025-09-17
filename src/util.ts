@@ -18,7 +18,7 @@ export function isUMMExecPred(filePath: string): boolean {
 export function setUMMPath(api: types.IExtensionApi, resolvedPath: string, gameId: string) {
   const state = api.store.getState();
   const tools = util.getSafe(state,
-    ['settings', 'gameMode', 'discovered', gameId, 'tools'], {});
+                             ['settings', 'gameMode', 'discovered', gameId, 'tools'], {});
 
   const validTools = Object.keys(tools)
     .filter(key => !!tools[key]?.path)

@@ -14,7 +14,7 @@ class UMMAttribDashlet extends PureComponentEx<{}, {}> {
       >
         <div>
           {t('Special thanks to {{author}} and all other UMM contributors for developing this tool',
-          { replace: { author: 'newman55', nl: '\n' }})}
+             { replace: { author: 'newman55', nl: '\n' }})}
         </div>
         <div>
           {t('UMM lives here: ')}
@@ -30,4 +30,4 @@ class UMMAttribDashlet extends PureComponentEx<{}, {}> {
 }
 
 export default withTranslation(['common', 'umm-modtype'])
-  (UMMAttribDashlet as any) as React.ComponentClass<{}>;
+(UMMAttribDashlet as any) as React.ComponentClass<{}>;

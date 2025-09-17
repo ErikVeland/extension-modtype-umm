@@ -102,28 +102,28 @@ async function downloadFromGithub(api: types.IExtensionApi, dlInfo: INexusDownlo
           return reject(new util.ProcessCanceled('Selected wrong download'));
         }
         api.events.emit('start-download', [result[0]], {}, undefined,
-          async (error, id) => {
-            if (error !== null) {
-              return reject(error);
-            }
-            try {
-              const modId = await finalize(api, dlInfo, id);
-              return resolve(modId);
-            } catch (err) {
-              return reject(err);
-            }
-          }, 'never');
+                        async (error, id) => {
+                          if (error !== null) {
+                            return reject(error);
+                          }
+                          try {
+                            const modId = await finalize(api, dlInfo, id);
+                            return resolve(modId);
+                          } catch (err) {
+                            return reject(err);
+                          }
+                        }, 'never');
       });
   })
-  .catch(err => {
-    if (err instanceof util.UserCanceled) {
-      return Promise.resolve();
-    } else if (err instanceof util.ProcessCanceled) {
-      return downloadFromGithub(api, dlInfo);
-    } else {
-      return Promise.reject(err);
-    }
-  });
+    .catch(err => {
+      if (err instanceof util.UserCanceled) {
+        return Promise.resolve();
+      } else if (err instanceof util.ProcessCanceled) {
+        return downloadFromGithub(api, dlInfo);
+      } else {
+        return Promise.reject(err);
+      }
+    });
 }
 
 function readRegistryKey(hive, key, name) {
@@ -234,10 +234,10 @@ async function download(api: types.IExtensionApi,
         return Promise.resolve();
       }
       log('error', 'failed to download from NexusMods.com',
-      {
-        dlInfo: JSON.stringify(downloadInfo, undefined, 2),
-        error: err,
-      });
+          {
+            dlInfo: JSON.stringify(downloadInfo, undefined, 2),
+            error: err,
+          });
       try {
         await downloadFromGithub(api, downloadInfo);
         return Promise.resolve();
@@ -270,5 +270,5 @@ function updateSupportedGames(api: types.IExtensionApi, downloadInfo: INexusDown
   const currentlySupported = downloads[downloadId].game;
   const supportedGames = new Set<string>(currentlySupported.concat(Object.keys(getSupportMap())));
   api.store.dispatch(actions.setCompatibleGames(downloadId,
-    Array.from(supportedGames).sort((lhs, rhs) => lhs === 'site' ? -1 : lhs.length - rhs.length)));
+                                                Array.from(supportedGames).sort((lhs, rhs) => lhs === 'site' ? -1 : lhs.length - rhs.length)));
 }

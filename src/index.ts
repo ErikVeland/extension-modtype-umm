@@ -112,8 +112,8 @@ function init(context: types.IExtensionContext) {
     }
   };
   context.registerInstaller('umm-installer', 15,
-    toBlue((files, gameId) => testUmmApp(files, gameId)),
-    toBlue((files, dest, gameId) => installUMM(context.api, files, dest, gameId)));
+                            toBlue((files, gameId) => testUmmApp(files, gameId)),
+                            toBlue((files, dest, gameId) => installUMM(context.api, files, dest, gameId)));
 
   context.registerModType('umm', 15, isSupported, () => undefined, modTypeTest, {
     mergeMods: true,
@@ -132,21 +132,21 @@ function init(context: types.IExtensionContext) {
         callback(error);
       } else {
         context.api.showErrorNotification('Failed to register UMM game', error,
-          { allowReport: false });
+                                          { allowReport: false });
       }
     }
   }, { minArguments: 1 });
 
   context.registerDashlet('UMM Support', 1, 2, 250, AttribDashlet,
-    showAttrib, () => ({}), undefined);
+                          showAttrib, () => ({}), undefined);
 
   context.once(() => {
     context.api.events.on('gamemode-activated',
-      (gameMode: string) => genOnGameModeActivated(context.api, gameMode));
+                          (gameMode: string) => genOnGameModeActivated(context.api, gameMode));
 
     context.api.events.on('check-mods-version',
-      (gameId: string, mods: { [modId: string]: types.IMod }) =>
-        genOnCheckUpdate(context.api, gameId, mods));
+                          (gameId: string, mods: { [modId: string]: types.IMod }) =>
+                            genOnCheckUpdate(context.api, gameId, mods));
   });
 
   return true;
